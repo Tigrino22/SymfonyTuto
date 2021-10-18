@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} -  Page de Bienvenue {% endblock %}
+
+{% block body %}
+
+<h2>Bienvenue à {{prenom}} {{nom}} ! </h2>
+
+    <button class="btn btn-primary">
+        <a href="{{ path('test')}}" title='vers test' style='color:white'>Vers la page Test</a>
+    </button>
+
+    <div id="components-demo">
+        <button-counter class="btn btn-info" 
+            data-toggle="popover" 
+            title="test Popover" 
+            data-content="Bouton géré par Vue JS via Webpack">
+        </button-counter>
+    </div>
+
+{% endblock %}

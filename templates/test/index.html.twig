@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+    Page de Bienvenue
+{% endblock %}
+
+{% block body %}
+
+    <h2>Page de Test</h2>
+    test date: 
+    {{ date() | date('d-m-Y H:i:s', 'Europe/Paris')}}
+    Variable de session auteur : {{app.session.get('auteur')}}
+
+    <button class="btn btn-primary">
+        <a href="{{ path('hello')}}" title='vers hello' style='color:white'>Vers la page Hello</a>
+    </button>
+
+{% endblock %}
