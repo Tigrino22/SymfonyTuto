@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
+use App\Entity\Reference;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProduitRepository;
 
 
 /**
@@ -43,6 +44,12 @@ class Produit
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lienImage;
+
+    /**
+     * @ORM\OneToOne(targetEntity=App\Entity\Reference::class, inversedBy="produit",fetch="EAGER", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reference;
 
     public function getId(): ?int
     {
@@ -105,6 +112,18 @@ class Produit
     public function setLienImage(?string $lienImage): self
     {
         $this->lienImage = $lienImage;
+
+        return $this;
+    }
+
+    public function getReference(): ?Reference
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?Reference $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

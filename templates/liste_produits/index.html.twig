@@ -4,32 +4,46 @@
 
 {% block body %}
 
-    <div class="d-flex flex-row justify-content-around flex-wrap">
-        {% for produit in listeProduits %}
-            <div class="card" style="width:200px;">
+    <div class="container">
 
-                <img src="{{ asset("img/"~produit.lienImage) }}" class="card-img-top" height="200px" alt="image">
-                <div class="card-body">
-                    <h5 class="card-title">{{ produit.nom }}</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            Prix: {{ produit.prix }} €
-                        </li>
-                        <li class="list-group-item">
-                            {% if produit.rupture %}
-                                <strong>Rutpture de stock</strong>
-                            {% else %}
-                                Quantité: {{ produit.quantite }}
-                            {% endif %}
-                        </li>
-                    </ul>
+        <div class="alert alert-success">
+            Il y a une promotion sur : {{ lastProduit.nom }}.
+        </div>
+
+        <div class="d-flex flex-row justify-content-around flex-wrap row">
+            {% for produit in listeProduits %}
+            <div class="col-md-4">
+                <div class="card text-center d-flex align-items-center">
+
+                    <img src="{{ asset("img/"~produit.lienImage) }}" class="card-img-top" style="max-width:200px;"alt="image">
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                        <h5 class="card-title">{{ produit.nom }}</h5>
+                        <ul class="list-group list-group-flush">
+                            {% if produit.reference is not null %}
+                                <li class="list-group-item">
+                                    Référence: {{ produit.reference.numero }} 
+                                </li>
+                            {% endif %}
+                            <li class="list-group-item">
+                                Prix: {{ produit.prix }} €
+                            </li>
+                            <li class="list-group-item">
+                                {% if produit.rupture %}
+                                    <strong>Rutpture de stock</strong>
+                                {% else %}
+                                    Quantité: {{ produit.quantite }}
+                                {% endif %}
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                        </div>
                     </div>
+
                 </div>
-
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-
+    
 {% endblock %}
