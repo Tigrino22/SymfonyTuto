@@ -18,6 +18,36 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
+    
+    /**
+     * orderingProduit
+     *
+     * @return mixed $listeProduits
+     */
+    public function orderingProduit()
+    {
+        $listeProduits = $this->getEntityManager()
+            ->createQuery("SELECT p FROM App\Entity\Produit p ORDER BY p.id DESC")
+            ->getResult();
+
+        return $listeProduits;
+    }
+    
+    /**
+     * getLastProduit
+     *
+     * @return mixed $lastProduit
+     */
+    public function getLastProduit()
+    {
+        $lastProduit = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+            return $lastProduit;
+    }
 
     // /**
     //  * @return Produit[] Returns an array of Produit objects
