@@ -24,6 +24,15 @@
                                     Référence: {{ produit.reference.numero }} 
                                 </li>
                             {% endif %}
+                                <li class="list-group-item">
+                            {% if produit.distributeurs is not null %}
+                            Distributeurs:
+                            {% for distributeur in produit.distributeurs %}
+                                    {{distributeur.nom}}&nbsp;
+                            {% endfor %}
+                            {% endif %}
+                                </li> 
+
                             <li class="list-group-item">
                                 Prix: {{ produit.prix }} €
                             </li>
