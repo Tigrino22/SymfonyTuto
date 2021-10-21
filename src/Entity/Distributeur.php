@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DistributeurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,17 @@ class Distributeur
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=App\Entity\Produit::class, mappedBy="distributeurs", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $produit;
+
+    public function __construct()
+    {
+        $this->produit = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +48,33 @@ class Distributeur
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduit(): Collection
+    {
+        return $this->produit;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produit->contains($produit)) {
+            $this->produit[] = $produit;
+            $produit->addDistributeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produit->removeElement($produit)) {
+            $produit->removeDistributeur($this);
+        }
 
         return $this;
     }
