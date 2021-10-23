@@ -17,13 +17,8 @@ class TestController extends AbstractController
         )]
     public function index(Session $session, Request $request): Response
     {
-        $session->start();
-        $session->getFlashBag()->add('message', 'Message informatif');
-        $session->getFlashbag()->add('message', 'Message complémentaire');
-        $session->set('statut', 'primary');
-
         return $this->render('test/index.html.twig');
-    }
+    }   
 
     #[Route(
         path: '/hello/{nom}/{prenom}',

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Website{% endblock %}
+
+{% block body %}
+
+    {% include "test/alert.html.twig" %}
+
+    <div class="d-flex justify-content-center">
+        {{form_start(my_form)}}
+        {{form_errors(my_form)}}
+
+        {{form_end(my_form)}}
+    </div>
+
+{% endblock %}
