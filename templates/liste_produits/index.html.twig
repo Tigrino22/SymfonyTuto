@@ -8,9 +8,7 @@
 
         {% include "test/alert.html.twig" %}
 
-        <div class="alert alert-success">
-            Il y a une promotion sur : {{ lastProduit.nom }}.
-        </div>
+        <a href="{{ path('insert')}}" class="btn btn-success mb-4">Ajout d'un nouveau produit</a>
 
         <div class="d-flex flex-row justify-content-around flex-wrap row">
             {% for produit in listeProduits %}
@@ -47,7 +45,8 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                            <a href="{{ path('update', {'id': produit.id} )}}" class="btn btn-primary">Mettre à jour</a>
+                            <a href="{{ path('delete', {'id': produit.id} )}}" class="btn btn-danger">Supprimer</a>
                         </div>
                     </div>
 
