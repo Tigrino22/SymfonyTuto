@@ -23,11 +23,6 @@ class Reference
      */
     private $numero;
 
-    /**
-     * @ORM\OneToOne(targetEntity=App\Entity\Produit::class, mappedBy="reference", cascade={"persist", "remove"})
-     */
-    private $produit;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -45,25 +40,4 @@ class Reference
         return $this;
     }
 
-    public function getProduit(): ?Produit
-    {
-        return $this->produit;
-    }
-
-    public function setProduit(?Produit $produit): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($produit === null && $this->produit !== null) {
-            $this->produit->setReference(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($produit !== null && $produit->getReference() !== $this) {
-            $produit->setReference($this);
-        }
-
-        $this->produit = $produit;
-
-        return $this;
-    }
 }

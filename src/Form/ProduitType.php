@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\ReferenceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +27,10 @@ class ProduitType extends AbstractType
                 'data_class' => null,
                 'empty_data' => 'Aucune image'
             ])
-            // ->add('reference')
+            ->add('reference', ReferenceType::class, [
+                'label' => 'Référence du produit',
+                "required" => false
+            ])
             // ->add('distributeurs')
         ;
     }

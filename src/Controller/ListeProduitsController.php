@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Distributeur;
 use App\Repository\DistributeurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
