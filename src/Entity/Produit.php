@@ -49,7 +49,7 @@ class Produit
     private $lienImage;
 
     /**
-     * @ORM\OneToOne(targetEntity=App\Entity\Reference::class, inversedBy="produit",fetch="EAGER", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=App\Entity\Reference::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $reference;

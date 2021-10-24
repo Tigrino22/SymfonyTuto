@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\Reference;
 use App\Form\ProduitType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
@@ -39,6 +40,15 @@ class AdminController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
             $file = $formProduit['lienImage']->getData();
+
+            $reference = $formProduit['reference']['numero']->getData();
+            
+            if ($reference === null) {
+
+                $reference = new Reference;
+                $reference->setNumero(rand());
+                $produit->setReference($reference);
+            }
 
             if (!is_string($file)) {
                 
